@@ -11,9 +11,14 @@ namespace ICT3101_Calculator_Lab
 {
     public class Calculator
     {
-        public Calculator() { }
+        //lab 4 changed here
+        //added _fileReader to constructor
+        public FileReader _fileReader;
+        public Calculator() { _fileReader = new FileReader();}
+        
         public double DoOperation(double num1, double num2, double num3, string op)
         {
+
             double result = double.NaN; // Default value
                                         // Use a switch statement to do the math.
             switch (op)
@@ -70,6 +75,9 @@ namespace ICT3101_Calculator_Lab
                     break;
                 case "secondReleaseSSI":
                     result = SecondReleaseSSI(num1, num2, num3);
+                    break;
+                case "magicNumber":
+                    result = GenMagicNum(num1, _fileReader);
                     break;
                 default:
                     break;
@@ -262,6 +270,65 @@ namespace ICT3101_Calculator_Lab
         {
             return (Subtract((oldSSI + CSI), changedCode));
         }
+
+
+        //lab 4
+        /*
+        public double GenMagicNum(double input)
+        {
+            double result = 0;
+            int choice = Convert.ToInt16(input);
+            
+            //Console.WriteLine(input);
+            //Console.WriteLine(choice);
+            //Dependency------------------------------
+            FileReader getTheMagic = new FileReader();
+            //----------------------------------------
+            string[] magicStrings = getTheMagic.Read(@"MagicNumbers.txt");
+            
+            //foreach (String i in magicStrings){
+            //    Console.WriteLine(i);
+            //}
+            
+            if ((choice >= 0) && (choice < magicStrings.Length))
+            {
+                Console.WriteLine(magicStrings[choice]);
+                result = Convert.ToDouble(magicStrings[choice]);
+            }
+            result = (result > 0) ? (2 * result) : (-2 * result);
+            return result;
+
+
+        }
+        */
+
+        public double GenMagicNum(double input, IFileReader fileReader)
+        {
+            double result = 0;
+            int choice = Convert.ToInt16(input);
+
+
+            //Dependency------------------------------
+            //FileReader getTheMagic = new FileReader();
+            //----------------------------------------
+            //changed here!!!
+            //string[] magicStrings = getTheMagic.Read(@"MagicNumbers.txt");
+            string[] magicStrings = _fileReader.Read(@"MagicNumbers.txt");
+            
+            if ((choice >= 0) && (choice < magicStrings.Length))
+            {
+                //Console.WriteLine(magicStrings[choice]);
+                result = Convert.ToDouble(magicStrings[choice]);
+            }
+            result = (result > 0) ? (2 * result) : (-2 * result);
+            //Console.WriteLine(result);
+            return result;
+
+
+        }
+
+
+
     }
 
 

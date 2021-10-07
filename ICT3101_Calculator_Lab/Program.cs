@@ -66,6 +66,7 @@ namespace ICT3101_Calculator_Lab
                 Console.WriteLine("\taverageNumberOfExpectedFailures - averageNumberOfExpectedFailures");
                 Console.WriteLine("\tdefectDensity - DefectDensity");
                 Console.WriteLine("\tsecondReleaseSSI - secondReleaseSSI");
+                Console.WriteLine("\tmagicNumber - magicNumber");
                 Console.Write("Your option? ");
                 string op = Console.ReadLine();
                 try

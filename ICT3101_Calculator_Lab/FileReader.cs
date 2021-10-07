@@ -1,0 +1,16 @@
+﻿
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+
+namespace ICT3101_Calculator_Lab
+{
+    public class FileReader: IFileReader
+    {
+        public string[] Read(string path)
+        {
+            return File.ReadAllLines(path);
+        }
+    }
+}
