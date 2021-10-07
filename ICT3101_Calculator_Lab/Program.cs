@@ -2,6 +2,10 @@
 
 namespace ICT3101_Calculator_Lab
 {
+    /**
+     * Updated on 07/10/2021
+     * Created By : Ho Mun
+    */
     class Program
     {
         //Lab 1
