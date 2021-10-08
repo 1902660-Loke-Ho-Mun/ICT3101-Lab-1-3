@@ -100,9 +100,9 @@ namespace ICT3101_Calculator_Lab
                     result = SecondReleaseSSI(num1, num2, num3);
                     break;
                 case "magicNumber":
-                    result = GenMagicNum(num1);
+                    //result = GenMagicNum(num1);
                     //result = GenMagicNum(num1, _fileReader);
-                    //result = GenMagicNum(num1, _mockFileReader);
+                    result = GenMagicNum(num1, _mockFileReader);
                     break;
                 default:
                     break;
