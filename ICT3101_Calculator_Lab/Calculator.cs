@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Moq;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
+
 /**
- * Updated on 07/10/2021
+ * Updated on 08/10/2021
  * Created By : Ho Mun
  */
 
@@ -14,8 +16,29 @@ namespace ICT3101_Calculator_Lab
         //lab 4 changed here
         //added _fileReader to constructor
         public FileReader _fileReader;
-        public Calculator() { _fileReader = new FileReader();}
-        
+        public Mock<IFileReader> _mockFileReader;
+
+        public Calculator() { 
+            _fileReader = new FileReader();
+            _mockFileReader = new Mock<IFileReader>();
+            _mockFileReader.Setup(fr => fr.Read("MagicNumbers.txt")).Returns(new string[2] { "42", "20" });
+        }
+        /*
+         * Testing code
+         * 
+        public Calculator(FileReader _fileReader)
+        {
+            _fileReader = new FileReader();
+            //_mockFileReader = new Mock<IFileReader>();
+            //_mockFileReader.Setup(fr => fr.Read("MagicNumbers.txt")).Returns(new string[2] { "42", "20" });
+        }
+        public Calculator(Mock<IFileReader> _mockFileReader)
+        {
+            //_fileReader = new FileReader();
+            _mockFileReader = new Mock<IFileReader>();
+            _mockFileReader.Setup(fr => fr.Read("MagicNumbers.txt")).Returns(new string[2] { "42", "20" });
+        }
+        */
         public double DoOperation(double num1, double num2, double num3, string op)
         {
 
@@ -77,7 +100,9 @@ namespace ICT3101_Calculator_Lab
                     result = SecondReleaseSSI(num1, num2, num3);
                     break;
                 case "magicNumber":
-                    result = GenMagicNum(num1, _fileReader);
+                    result = GenMagicNum(num1);
+                    //result = GenMagicNum(num1, _fileReader);
+                    //result = GenMagicNum(num1, _mockFileReader);
                     break;
                 default:
                     break;
@@ -273,7 +298,7 @@ namespace ICT3101_Calculator_Lab
 
 
         //lab 4
-        /*
+        //Basic
         public double GenMagicNum(double input)
         {
             double result = 0;
@@ -292,7 +317,7 @@ namespace ICT3101_Calculator_Lab
             
             if ((choice >= 0) && (choice < magicStrings.Length))
             {
-                Console.WriteLine(magicStrings[choice]);
+                Console.WriteLine("From File: " + (magicStrings[choice]).ToString());
                 result = Convert.ToDouble(magicStrings[choice]);
             }
             result = (result > 0) ? (2 * result) : (-2 * result);
@@ -300,8 +325,10 @@ namespace ICT3101_Calculator_Lab
 
 
         }
-        */
-
+        
+        //lab 4
+        //IFileReader
+        
         public double GenMagicNum(double input, IFileReader fileReader)
         {
             double result = 0;
@@ -318,6 +345,7 @@ namespace ICT3101_Calculator_Lab
             if ((choice >= 0) && (choice < magicStrings.Length))
             {
                 //Console.WriteLine(magicStrings[choice]);
+                Console.WriteLine("From File: " + (magicStrings[choice]).ToString());
                 result = Convert.ToDouble(magicStrings[choice]);
             }
             result = (result > 0) ? (2 * result) : (-2 * result);
@@ -326,7 +354,35 @@ namespace ICT3101_Calculator_Lab
 
 
         }
+        
+        //lab 4
+        //mock file reader
+        public double GenMagicNum(double input, Mock<IFileReader> _mockFileReader)
+        {
+            double result = 0;
+            int choice = Convert.ToInt16(input);
 
+
+            //Dependency------------------------------
+            //FileReader getTheMagic = new FileReader();
+            //----------------------------------------
+            //changed here!!!
+            //string[] magicStrings = getTheMagic.Read(@"MagicNumbers.txt");
+            //string[] magicStrings = _fileReader.Read(@"MagicNumbers.txt");
+            string[] magicStrings = _mockFileReader.Object.Read(@"MagicNumbers.txt");
+
+            if ((choice >= 0) && (choice < magicStrings.Length))
+            {
+                //Console.WriteLine(magicStrings[choice]);
+                Console.WriteLine("From File: " + (magicStrings[choice]).ToString());
+                result = Convert.ToDouble(magicStrings[choice]);
+            }
+            result = (result > 0) ? (2 * result) : (-2 * result);
+            //Console.WriteLine(result);
+            return result;
+
+
+        }
 
 
     }

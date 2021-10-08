@@ -8,6 +8,7 @@ namespace ICT3101_Calculator.UnitTests
 {
     class MagicNumberUnitTests
     {
+        
         //lab 4 changed here
         //added _fileReader in setup
         private Calculator _calculator;
@@ -25,7 +26,7 @@ namespace ICT3101_Calculator.UnitTests
         public void GenMagicNum_WithPositiveInputAndPositiveNumberRetrieved_ResultEqualToTwoTimesItemRetrieved(int a)
         {
             double result = _calculator.GenMagicNum(a, _fileReader);
-            Console.WriteLine(result);
+            Console.WriteLine("Result: "+ (result).ToString());
             Assert.That((int)result, Is.EqualTo(8));
 
         }
@@ -35,7 +36,7 @@ namespace ICT3101_Calculator.UnitTests
         public void GenMagicNum_WithPositiveInputButNegativeNumberRetrieved_ResultEqualToNegativeTwoTimesItemRetrieved(int a)
         {
             double result = _calculator.GenMagicNum(a, _fileReader);
-            Console.WriteLine(result);
+            Console.WriteLine("Result: " + (result).ToString());
             Assert.That((int)result, Is.EqualTo(4));
 
         }
@@ -45,7 +46,7 @@ namespace ICT3101_Calculator.UnitTests
         public void GenMagicNum_WithNegativeInput_ResultEqualToItemRetrieved(int a)
         {
             double result = _calculator.GenMagicNum(a, _fileReader);
-            Console.WriteLine(result);
+            Console.WriteLine("Result: " + (result).ToString());
             Assert.That((int)result, Is.EqualTo(0));
 
         }
@@ -55,10 +56,10 @@ namespace ICT3101_Calculator.UnitTests
         public void GenMagicNum_WithAnOutOfRangeInput_ResultEqualsToZero(int a)
         {
             double result = _calculator.GenMagicNum(a, _fileReader);
-            Console.WriteLine(result);
+            Console.WriteLine("Result: " + (result).ToString());
             Assert.That((int)result, Is.EqualTo(0));
 
         }
-
+        
     }
 }
