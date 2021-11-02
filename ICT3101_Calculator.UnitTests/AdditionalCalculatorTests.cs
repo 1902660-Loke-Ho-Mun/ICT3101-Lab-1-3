@@ -38,7 +38,7 @@ namespace ICT3101_Calculator.UnitTests
 
             //double result = _calculator.GenMagicNum(a, _fileReader);
             Console.WriteLine("Result: " + (result).ToString());
-            Assert.That((int)result, Is.EqualTo(20));
+            Assert.That((int)result, Is.EqualTo(40));
 
         }
 
